@@ -1,0 +1,43 @@
+.form-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+}
+.form-wrapper form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-wrapper form button {
+    margin-bottom: 12px;
+    height: 32px;
+    border-radius: 8px;
+    border: 0;
+    cursor: pointer;
+}
+
+.form-wrapper form button[type="submit"] {
+    background-color: #ffa502;
+}
+
+.form-wrapper form button[type="submit"]:hover {
+    background-color: #ffb735;
+}
+
+.form-wrapper form button[type="submit"]:active {
+    background-color: #e69502;
+}
+
+.form-wrapper form label {
+    margin-bottom: 16px;
+}
+
+.form-wrapper form input {
+    border-radius: 8px;
+    border: 0;
+    width: 260px;
+    height: 32px;
+    padding: 0 8px;
+    margin-top: 4px;
+}

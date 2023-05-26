@@ -1,7 +1,5 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import TreeView from '@/components/layout/TreeView';
-import DetailView from '@/components/layout/DetailView';
+import Dashboard from '@/pages/dashboard'
 import arrayToTree from '@/utils/arrayToTree'
 import Header from '@/components/layout/Header';
 import CredentialsForm from '@/components/form/CredentialsForm';
@@ -86,12 +84,6 @@ const DATA = [
       "StorageClass": "STANDARD"
   }
 ]
-
-
-const Dashboard = ({tree}: {tree: any}) => <div>
-<TreeView tree={tree} />
-<DetailView />
-</div>
 
 function App() {
   const mock_tree = arrayToTree(DATA);

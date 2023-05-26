@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
+import './styles.css';
 
 interface AwsCredentials {
   accessKeyId: string;
@@ -28,33 +29,48 @@ const CredentialsForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setStoredCredentials({ accessKeyId, secretAccessKey, bucketName, bucketRegion });
+
+    //TODO: test the credentials before redirecting 
     navigate('/');
   };
 
+  const handleDisconnect = () => {
+    setStoredCredentials(initialCredentials);
+    setAccessKeyId('');
+    setSecretAccessKey('');
+    setBucketName('');
+    setBucketRegion('');
+  }
+
+  const hasValue = !!(storedCredentials.accessKeyId || storedCredentials.secretAccessKey || storedCredentials.bucketName || storedCredentials.bucketRegion);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Access Key ID:
-        <input type="text" value={accessKeyId} onChange={(e) => setAccessKeyId(e.target.value)} required />
-      </label>
+    <div className='form-wrapper'>
+        <form onSubmit={handleSubmit}>
+        <label>
+            Access Key ID:<br />
+            <input type="text" value={accessKeyId} onChange={(e) => setAccessKeyId(e.target.value)} required />
+        </label>
 
-      <label>
-        Secret Access Key:
-        <input type="text" value={secretAccessKey} onChange={(e) => setSecretAccessKey(e.target.value)} required />
-      </label>
+        <label>
+            Secret Access Key:<br />
+            <input type="text" value={secretAccessKey} onChange={(e) => setSecretAccessKey(e.target.value)} required />
+        </label>
 
-      <label>
-        Bucket Name:
-        <input type="text" value={bucketName} onChange={(e) => setBucketName(e.target.value)} required />
-      </label>
+        <label>
+            Bucket Name:<br />
+            <input type="text" value={bucketName} onChange={(e) => setBucketName(e.target.value)} required />
+        </label>
 
-      <label>
-        Bucket Region:
-        <input type="text" value={bucketRegion} onChange={(e) => setBucketRegion(e.target.value)} required />
-      </label>
+        <label>
+            Bucket Region:<br />
+            <input type="text" value={bucketRegion} onChange={(e) => setBucketRegion(e.target.value)} required />
+        </label>
 
-      <button type="submit">Submit</button>
-    </form>
+        <button type="submit">{hasValue ? "Update" : "Connect"}</button>
+        {hasValue && <button type="button" onClick={handleDisconnect}>Disconnect</button>}
+        </form>
+    </div>
   );
 };
 
