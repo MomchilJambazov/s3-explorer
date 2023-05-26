@@ -1,0 +1,11 @@
+.tree-view ul {
+    list-style-type: none;
+}
+
+.tree-view li {
+    cursor: pointer;
+}
+
+.tree-view li:hover {
+    background-color: #eccc68;
+}
