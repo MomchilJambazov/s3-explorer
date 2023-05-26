@@ -1,6 +1,11 @@
+import { TreeNode } from '@/types'
 import './styles.css';
 
-function DetailView() {
+interface TreeViewProps {
+  tree: TreeNode;
+}
+
+const DetailView: React.FC<TreeViewProps> = ({ tree }) => {
   return (
     <div className="detail-view">
     </div>
