@@ -1,9 +1,11 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TreeView from '@/components/layout/TreeView';
 import DetailView from '@/components/layout/DetailView';
 import arrayToTree from '@/utils/arrayToTree'
-import './App.css';
-import logo from './s3-logo.png';
+import Header from '@/components/layout/Header';
+import CredentialsForm from '@/components/form/CredentialsForm';
+import NotFound from '@/pages/not-found';
 
 const DATA = [
   {
@@ -85,21 +87,25 @@ const DATA = [
   }
 ]
 
+
+const Dashboard = ({tree}: {tree: any}) => <div>
+<TreeView tree={tree} />
+<DetailView />
+</div>
+
 function App() {
   const mock_tree = arrayToTree(DATA);
 
   return (
     <>
-      <header className="app-header">
-        <img src={logo} className="app-logo" alt="logo" />
-        <p className="app-name">
-          S3 File Explorer
-        </p>
-      </header>
-      <div>
-        <TreeView tree={mock_tree} />
-        <DetailView />
-      </div>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Dashboard tree={mock_tree}/>}/>
+        <Route path="/credentials" element={<CredentialsForm />}/>
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
+    </Router>
     </>
   );
 }
