@@ -9,8 +9,21 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({ node }) => {
   const [isOpen, setIsOpen] = useState(false);
   const hasChild = node.children && Object.keys(node.children).length > 0;
   
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
+  const navigateToFolder = () => {
+    alert(node.key)
+  }
+
+  const handleClick = (e:any) => {
+    if (e.detail === 1) {
+      if(!hasChild) {
+        navigateToFolder();
+      } else {
+        setIsOpen(!isOpen);
+      }
+    }
+    if (e.detail === 2) { //handle double click
+      navigateToFolder();
+    }
   };
 
   //We need to render only folders
@@ -20,9 +33,10 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({ node }) => {
 
   return (
     <li>
-      <div onClick={handleToggle}>
+      <div onClick={handleClick}>
+        {isOpen ? '📂 ' : '📁 '}
         {node.name}
-        {hasChild && (isOpen ? ' -' : ' +')}
+        {hasChild && <span className='indicator'>{isOpen ? '▼' : '▶'}</span>}
       </div>
       {isOpen && hasChild && node.children && (
         <ul>

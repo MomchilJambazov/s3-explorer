@@ -1,11 +1,24 @@
 .tree-view ul {
     list-style-type: none;
+    padding: 5px;
+}
+
+.tree-view > ul > li {
+    border: 0;
 }
 
 .tree-view li {
     cursor: pointer;
+    border-inline-start: 1px dotted grey;
+    padding: 8px;
 }
 
 .tree-view li:hover {
     background-color: #eccc68;
+}
+
+.indicator {
+    font-size: 0.6em;
+    color: grey;
+    margin-inline-start: 4px;
 }
