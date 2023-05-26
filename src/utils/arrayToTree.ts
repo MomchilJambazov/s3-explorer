@@ -2,7 +2,7 @@ import { TreeNode } from '@/types'
 
 // Function to convert array to tree
 function arrayToTree(data: any[]): TreeNode {
-    const root: TreeNode = { name: '', key: '', type: 'folder', children: {} };
+    const root: TreeNode = { name: 'root', key: '', type: 'folder', children: {} };
   
     for (const item of data) {
       let pathParts = item.Key.split('/');

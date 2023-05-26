@@ -13,8 +13,18 @@
     padding: 8px;
 }
 
-.tree-view li:hover {
+.tree-view li.selected {
     background-color: #eccc68;
+    border: 1px dotted grey;
+}
+
+.tree-view li.current {
+    background-color: #95b7f6;
+    border: 1px dotted #1e90ff;
+}
+
+.tree-view li.current .indicator {
+    color: #2f3542;
 }
 
 .indicator {

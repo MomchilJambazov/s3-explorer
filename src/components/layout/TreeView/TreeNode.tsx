@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { TreeContext } from '@/contexts/TreeContext';
 import { TreeNode } from '@/types'
 
 interface TreeNodeProps {
@@ -8,21 +9,21 @@ interface TreeNodeProps {
 const TreeNodeComponent: React.FC<TreeNodeProps> = ({ node }) => {
   const [isOpen, setIsOpen] = useState(false);
   const hasChild = node.children && Object.keys(node.children).length > 0;
-  
-  const navigateToFolder = () => {
-    alert(node.key)
-  }
+  const { selectedItem, setSelectedItem, currentDir, setCurrentDir } = useContext(TreeContext);
+  const isSelected = selectedItem === node.key;
+  const isCurrentDir = currentDir === node.key;
 
-  const handleClick = (e:any) => {
+  const handleExpand = () => setIsOpen(!isOpen);
+
+  const handleClick = (e: React.MouseEvent) => {
     if (e.detail === 1) {
-      if(!hasChild) {
-        navigateToFolder();
-      } else {
-        setIsOpen(!isOpen);
+      setSelectedItem(node.key)
+      if (isSelected) {
+        handleExpand();
       }
     }
     if (e.detail === 2) { //handle double click
-      navigateToFolder();
+      setCurrentDir(node.key);
     }
   };
 
@@ -31,12 +32,15 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({ node }) => {
     return null;
   }
 
+  const folderIcon = (isOpen || isCurrentDir) ? '📂 ' : '📁 ';
+  const activeClass = isCurrentDir ? 'current' : isSelected ? 'selected' : '';
+
   return (
-    <li>
+    <li className={activeClass}>
       <div onClick={handleClick}>
-        {isOpen ? '📂 ' : '📁 '}
+        {folderIcon}
         {node.name}
-        {hasChild && <span className='indicator'>{isOpen ? '▼' : '▶'}</span>}
+        {hasChild && <span onClick={handleExpand} className='indicator'>{isOpen ? '▼' : '▶'}</span>}
       </div>
       {isOpen && hasChild && node.children && (
         <ul>
