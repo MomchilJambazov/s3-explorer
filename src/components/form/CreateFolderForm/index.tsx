@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import useCreateFolder from '@/hooks/useCreateFolder';
+import Toast from "@/components/ui/Toast";
+import { ToastType } from '@/types'
 
 interface CreateFolderFormProps {
     dir: string | null;
@@ -10,19 +12,24 @@ interface CreateFolderFormProps {
 
 const CreateFolderForm: React.FC<CreateFolderFormProps> = ({ dir, refetch }) => {
     const [folderName, setFolderName] = useState('');
-    const [objectPath, setPath] = useState('');
+    const { createFolder } = useCreateFolder();
+    const [toast, setToast] = useState<ToastType | null>(null);
+    const toastCleanup = () => setToast(null)
 
-    const handleUpdate = () => {
-        setPath('');
-        refetch();
-    }
-
-    useCreateFolder(objectPath, handleUpdate);
-
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
-        if (folderName.trim() !== '') {
-            setPath(`${dir || ''}${folderName.trim()}/`);
+    const handleSubmit = async () => {
+        try {
+            await createFolder(`${dir || ''}${folderName.trim()}/`)
+            setToast({
+                message: 'Folder created successfully!',
+                type: 'success',
+            });
+            refetch();
+        } catch (error) {
+            setToast({
+                message: `Error creating folder: ${error}`,
+                type: 'danger',
+            });
+        } finally {
             setFolderName('');
         }
     };
@@ -34,15 +41,18 @@ const CreateFolderForm: React.FC<CreateFolderFormProps> = ({ dir, refetch }) => 
     }
 
     return (
-        <form onSubmit={handleSubmit} style={{display:'flex', gap: '6px'}}>
-            <Input
-                type="text"
-                placeholder="Enter folder name"
-                value={folderName}
-                onChange={handleChange}
-            />
-            <Button className='success' type="submit" disabled={!folderName}>Create</Button>
-        </form>
+        <>
+            {toast && <Toast {...toast} callback={toastCleanup} />}
+            <div style={{ display: 'flex', gap: '6px' }}>
+                <Input
+                    type="text"
+                    placeholder="Enter folder name"
+                    value={folderName}
+                    onChange={handleChange}
+                />
+                <Button className='success' onClick={handleSubmit} disabled={!folderName}>Create</Button>
+            </div>
+        </>
     );
 };
 

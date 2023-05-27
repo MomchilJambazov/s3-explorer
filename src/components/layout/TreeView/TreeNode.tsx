@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { TreeContext } from '@/contexts/TreeContext';
 import { TreeNode } from '@/types'
 
@@ -26,6 +26,10 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({ node }) => {
       setCurrentDir(node.key);
     }
   };
+
+  useEffect(() => {
+    setSelectedItem(null)
+  }, [currentDir]);
 
   //We need to render only folders
   if (node.type === 'file') {

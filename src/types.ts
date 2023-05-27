@@ -18,3 +18,8 @@ export interface Breadcrumb {
   name: string;
   path: string;
 }
+
+export interface ToastType {
+  message: string;
+  type: 'success' | 'warning' | 'danger';
+}

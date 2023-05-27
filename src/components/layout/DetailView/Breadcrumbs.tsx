@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { TreeContext } from '@/contexts/TreeContext'
 import { generateBreadcrumbs } from '@/utils/generateBreadcrumps'
+import CreateFileForm from '@/components/form/CreateFileForm'
 import CreateFolderForm from '@/components/form/CreateFolderForm'
 import Button from '@/components/ui/Button'
 import Popover from '@/components/ui/Popover'
@@ -27,7 +28,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ currentDir, refetch, showCrea
         {showCreateOptions && 
           <>
             <Popover
-              content={<div>This is the popover content</div>}
+              content={<CreateFileForm refetch={refetch} dir={currentDir} />}
               trigger={<Button>Add file</Button>}
             />
             <Popover

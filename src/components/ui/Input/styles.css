@@ -2,7 +2,13 @@
     border-radius: 8px;
     border: 0;
     min-width: 260px;
-    height: 32px;
+    min-height: 32px;
     padding: 0 8px;
     background-color: #f1f2f6;
+}
+
+textarea.input {
+    min-height: 120px;
+    padding: 8px;
+    font-family: "Ubuntu";
 }
