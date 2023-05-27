@@ -7,7 +7,7 @@ import useS3Objects from '@/hooks/useS3Objects';
 
 const Dashboard = () => {
     const { currentDir, treeData, setTreeData } = useContext(TreeContext);
-    const { data, isLoading } = useS3Objects();
+    const { data, isLoading, hasError, refetch } = useS3Objects();
 
     useEffect(() => {
         if (data?.Contents) {
@@ -16,18 +16,19 @@ const Dashboard = () => {
         }
     }, [data]);
 
-    if (!treeData) {
-        return null;
+    if (!treeData && isLoading) {
+        //TODO: Add skeleton
+        return <>Loading...</>;
     }
 
-    if (!treeData && isLoading) {
-        return <>Loading...</>;
+    if (!treeData || hasError) {
+        return null;
     }
 
     return (
         <div className='dashboard'>
             <TreeView tree={treeData} />
-            <DetailView tree={treeData} currentDir={currentDir} />
+            <DetailView tree={treeData} refetch={refetch} currentDir={currentDir} />
         </div>
     )
 }

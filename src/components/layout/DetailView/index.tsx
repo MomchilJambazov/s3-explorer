@@ -8,9 +8,10 @@ import './styles.css';
 interface TreeViewProps {
   tree: TreeNode;
   currentDir: string | null;
+  refetch: () => void;
 }
 
-const DetailView: React.FC<TreeViewProps> = ({ tree, currentDir }) => {
+const DetailView: React.FC<TreeViewProps> = ({ tree, currentDir, refetch }) => {
   const currentNode = findNodeByKey(tree, currentDir);
   const isFolder = currentNode?.type === "folder";
   const currentDirObjects = Object.values(currentNode?.children || {});
@@ -18,7 +19,7 @@ const DetailView: React.FC<TreeViewProps> = ({ tree, currentDir }) => {
 
   return (
     <div>
-      <Breadcrumbs currentDir={currentDir} />
+      <Breadcrumbs currentDir={currentDir} refetch={refetch} />
       <div className="detail-view card">
         {(!!currentDir && !currentDirObjects.length && isFolder) && <p>Folder is empty</p>}
         {currentDirObjects.map(childNode => {
