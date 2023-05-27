@@ -1,0 +1,25 @@
+.toast {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    left: 0;
+    text-align: center;
+    padding: 12px 24px;
+    border-radius: 8px;
+    width: fit-content;
+    margin: auto;
+    color: white;
+}
+
+.toast.success {
+    background-color: #0ec35abf;
+}
+
+.toast.warning {
+    background-color: #f1c02ccd;
+    color: rgb(32, 35, 43);
+}
+
+.toast.danger {
+    background-color: #ea1b2cc0;
+}

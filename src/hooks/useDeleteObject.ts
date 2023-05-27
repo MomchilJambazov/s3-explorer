@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { DeleteObjectCommand } from '@aws-sdk/client-s3';
 import useS3Client from '@/hooks/useS3Client';
 import { CredentialsContext } from '@/contexts/CredentialsContext';
@@ -6,6 +6,7 @@ import { CredentialsContext } from '@/contexts/CredentialsContext';
 const useDeleteS3Object = () => {
   const client = useS3Client();
   const { credentials } = useContext(CredentialsContext);
+  const [error, setError] = useState<null | Error>(null);
 
   const deleteObject = async (objectKey: string) => {
     try {
@@ -15,13 +16,15 @@ const useDeleteS3Object = () => {
           Key: objectKey
         })
       );
-    } catch (error) {
+    } catch (e) {
       console.error('Error deleting S3 object:', error);
-      // Handle error if needed
+      setError(e as Error);
     }
   };
 
-  return deleteObject;
+  const errorCleanup = () => setError(null);
+
+  return { deleteObject, error, errorCleanup };
 };
 
 export default useDeleteS3Object;

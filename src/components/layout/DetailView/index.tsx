@@ -6,20 +6,24 @@ import useDeleteObject from "@/hooks/useDeleteObject";
 import Breadcrumbs from "./Breadcrumbs";
 import Button from "@/components/ui/Button";
 import Popover from "@/components/ui/Popover";
+import Toast from "@/components/ui/Toast";
 import "./styles.css";
 
 interface TreeViewProps {
   tree: TreeNode;
   currentDir: string | null;
+  keyCount: number;
+  maxKeys: number;
   refetch: () => void;
 }
 
-const DetailView: React.FC<TreeViewProps> = ({ tree, currentDir, refetch }) => {
+const DetailView: React.FC<TreeViewProps> = ({ tree, currentDir, refetch, keyCount, maxKeys }) => {
   const currentNode = findNodeByKey(tree, currentDir);
   const isFolder = currentNode?.type === "folder";
+  const isKeyLimitReached = keyCount >= maxKeys;
   const currentDirObjects = Object.values(currentNode?.children || {});
   const { setCurrentDir } = useContext(TreeContext);
-  const deleteObject = useDeleteObject();
+  const { deleteObject, error, errorCleanup } = useDeleteObject();
 
   const handleDelete = (key: string, event?: React.MouseEvent) => {
     event?.stopPropagation();
@@ -28,10 +32,11 @@ const DetailView: React.FC<TreeViewProps> = ({ tree, currentDir, refetch }) => {
 
   return (
     <div>
+      {error && <Toast message={`Error deleting S3 object: ${error?.message}`} type="danger" callback={errorCleanup} />}
       <Breadcrumbs
         currentDir={currentDir}
         refetch={refetch}
-        showCreateOptions={isFolder}
+        showCreateOptions={isFolder && !isKeyLimitReached}
       />
       {!!currentDir && !currentDirObjects.length && isFolder ? (
         <div className="card">

@@ -38,11 +38,17 @@ const Dashboard = () => {
     }
 
     return (
-        <div className='dashboard'>
-            <TreeView tree={treeData} />
-            <DetailView tree={treeData} refetch={refetch} currentDir={currentDir} />
-        </div>
-    )
+      <div className="dashboard">
+        <TreeView tree={treeData} />
+        <DetailView
+          tree={treeData}
+          refetch={refetch}
+          currentDir={currentDir}
+          keyCount={data?.KeyCount || 0}
+          maxKeys={data?.MaxKeys || 0}
+        />
+      </div>
+    );
 }
 
 export default Dashboard;

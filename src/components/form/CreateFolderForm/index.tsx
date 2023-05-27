@@ -29,7 +29,7 @@ const CreateFolderForm: React.FC<CreateFolderFormProps> = ({ dir, refetch }) => 
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
-        const sanitizedValue = value.replace(/[^a-zA-Z_-]/g, '');
+        const sanitizedValue = value.replace(/[^a-zA-Z0-9_-]/g, '');
         setFolderName(sanitizedValue)
     }
 
