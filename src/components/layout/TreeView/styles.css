@@ -1,6 +1,11 @@
+div.tree-view {
+    flex-grow: 1;
+}
+
 .tree-view ul {
     list-style-type: none;
     padding: 5px;
+    margin: 0;
 }
 
 .tree-view > ul > li {

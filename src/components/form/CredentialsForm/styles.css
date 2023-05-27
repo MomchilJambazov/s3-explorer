@@ -17,6 +17,10 @@
     cursor: pointer;
 }
 
+button {
+    background-color: #ced6e0
+}
+
 .form-wrapper form button[type="submit"] {
     background-color: #ffa502;
 }
@@ -40,4 +44,5 @@
     height: 32px;
     padding: 0 8px;
     margin-top: 4px;
+    background-color: #f1f2f6;
 }

@@ -24,11 +24,12 @@ const Dashboard = () => {
         return <>Loading...</>;
     }
 
-    return <div>
-        {`/root/${currentDir}`}
-        <TreeView tree={treeData} />
-        <DetailView tree={treeData} />
-    </div>
+    return (
+        <div className='dashboard'>
+            <TreeView tree={treeData} />
+            <DetailView tree={treeData} currentDir={currentDir} />
+        </div>
+    )
 }
 
 export default Dashboard;

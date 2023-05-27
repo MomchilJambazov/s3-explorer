@@ -31,25 +31,25 @@ const CredentialsForm: React.FC = () => {
 
     return (
         <div className='form-wrapper'>
-            <form onSubmit={handleSubmit}>
+            <form className='card' onSubmit={handleSubmit}>
                 <label>
                     Access Key ID:<br />
-                    <input type="text" value={accessKeyId} onChange={(e) => setAccessKeyId(e.target.value)} required />
+                    <input type="text" placeholder="Enter access key" value={accessKeyId} onChange={(e) => setAccessKeyId(e.target.value)} required />
                 </label>
 
                 <label>
                     Secret Access Key:<br />
-                    <input type="text" value={secretAccessKey} onChange={(e) => setSecretAccessKey(e.target.value)} required />
+                    <input type="text" placeholder="Enter secret key" value={secretAccessKey} onChange={(e) => setSecretAccessKey(e.target.value)} required />
                 </label>
 
                 <label>
                     Bucket Name:<br />
-                    <input type="text" value={bucketName} onChange={(e) => setBucketName(e.target.value)} required />
+                    <input type="text" placeholder="Enter bucket name" value={bucketName} onChange={(e) => setBucketName(e.target.value)} required />
                 </label>
 
                 <label>
                     Bucket Region:<br />
-                    <input type="text" value={bucketRegion} onChange={(e) => setBucketRegion(e.target.value)} required />
+                    <input type="text" placeholder="Enter region" value={bucketRegion} onChange={(e) => setBucketRegion(e.target.value)} required />
                 </label>
 
                 <button type="submit">{hasValidCredentials ? "Update" : "Connect"}</button>

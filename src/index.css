@@ -17,3 +17,23 @@ body {
 a {
   color: #3742fa;
 }
+
+.dashboard {
+  display: flex;
+  gap: 15px;
+  padding: 24px;
+}
+
+.dashboard div {
+  flex-grow: 3;
+}
+
+.card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.breadcrumps {
+  margin-bottom: 16px;
+}

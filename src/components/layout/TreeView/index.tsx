@@ -8,7 +8,7 @@ interface TreeViewProps {
 }
 
 const TreeView: React.FC<TreeViewProps> = ({ tree }) => (
-    <div className="tree-view">
+    <div className="tree-view card">
         <ul>
             {Object.values(tree.children || {}).map(childNode => (
             <TreeNodeComponent key={childNode.name} node={childNode} />
