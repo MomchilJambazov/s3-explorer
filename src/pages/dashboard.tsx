@@ -5,9 +5,21 @@ import DetailView from '@/components/layout/DetailView';
 import { TreeContext } from '@/contexts/TreeContext'
 import useS3Objects from '@/hooks/useS3Objects';
 
+const POLLING_INTERVAL_MS = 15000;
+
 const Dashboard = () => {
     const { currentDir, treeData, setTreeData } = useContext(TreeContext);
     const { data, isLoading, hasError, refetch } = useS3Objects();
+
+    useEffect(() => {
+        const fetchTimer = setInterval(() => {
+            refetch();
+        }, POLLING_INTERVAL_MS); // Refetch every 15 seconds
+
+        return () => {
+            clearInterval(fetchTimer);
+        };
+    }, []);
 
     useEffect(() => {
         if (data?.Contents) {

@@ -6,6 +6,11 @@ button {
     cursor: pointer;
 }
 
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 button:hover {
     background-color: #d8dee6
 }
@@ -24,4 +29,17 @@ button.primary:hover {
 
 button.primary:active {
     background-color: #e69502;
+}
+
+button.success {
+    background-color: #27cf6d;
+    color: white;
+}
+
+button.success:hover {
+    background-color: #26c066;
+}
+
+button.success:active {
+    background-color: #13aa52;
 }

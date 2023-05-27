@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
 import useCreateFolder from '@/hooks/useCreateFolder';
 
 interface CreateFolderFormProps {
@@ -10,7 +12,12 @@ const CreateFolderForm: React.FC<CreateFolderFormProps> = ({ dir, refetch }) => 
     const [folderName, setFolderName] = useState('');
     const [objectPath, setPath] = useState('');
 
-    useCreateFolder(objectPath, () => {setPath(''); refetch();});
+    const handleUpdate = () => {
+        setPath('');
+        refetch();
+    }
+
+    useCreateFolder(objectPath, handleUpdate);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -21,18 +28,14 @@ const CreateFolderForm: React.FC<CreateFolderFormProps> = ({ dir, refetch }) => 
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
+        <form onSubmit={handleSubmit} style={{display:'flex', gap: '6px'}}>
+            <Input
                 type="text"
                 placeholder="Enter folder name"
                 value={folderName}
                 onChange={(event) => setFolderName(event.target.value)}
             />
-            <button type="submit">Create</button>
-            {/* <button type="submit" disabled={isLoading}>
-        {isLoading ? 'Creating...' : 'Create Folder'}
-      </button>
-      {error && <p className="error-message">Error: {error.message}</p>} */}
+            <Button className='success' type="submit" disabled={!folderName}>Create</Button>
         </form>
     );
 };

@@ -18,11 +18,5 @@
 }
 
 .form-wrapper form input {
-    border-radius: 8px;
-    border: 0;
-    width: 260px;
-    height: 32px;
-    padding: 0 8px;
     margin-top: 4px;
-    background-color: #f1f2f6;
 }
