@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CredentialsContext } from '@/contexts/CredentialsContext';
+import Button from "@/components/ui/Button"
 import './styles.css';
 
 
@@ -52,8 +53,8 @@ const CredentialsForm: React.FC = () => {
                     <input type="text" placeholder="Enter region" value={bucketRegion} onChange={(e) => setBucketRegion(e.target.value)} required />
                 </label>
 
-                <button type="submit">{hasValidCredentials ? "Update" : "Connect"}</button>
-                {hasValidCredentials && <button type="button" onClick={handleDisconnect}>Disconnect</button>}
+                <Button className="primary" type="submit">{hasValidCredentials ? "Update" : "Connect"}</Button>
+                {hasValidCredentials && <Button type="button" onClick={handleDisconnect}>Disconnect</Button>}
             </form>
         </div>
     );

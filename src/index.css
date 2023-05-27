@@ -25,8 +25,8 @@ a, .link {
   padding: 24px;
 }
 
-.dashboard div {
-  flex-grow: 3;
+.dashboard > div {
+  flex-grow: 1;
 }
 
 .card {
@@ -37,4 +37,15 @@ a, .link {
 
 .breadcrumps {
   margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.breadcrumps div:first-child {
+  flex-grow: 1;
+}
+.breadcrumps div:last-child {
+  flex-grow: 0;
+  display: flex;
+  gap: 8px;
 }

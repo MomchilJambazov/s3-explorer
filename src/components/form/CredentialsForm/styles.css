@@ -11,26 +11,6 @@
 
 .form-wrapper form button {
     margin-bottom: 12px;
-    height: 32px;
-    border-radius: 8px;
-    border: 0;
-    cursor: pointer;
-}
-
-button {
-    background-color: #ced6e0
-}
-
-.form-wrapper form button[type="submit"] {
-    background-color: #ffa502;
-}
-
-.form-wrapper form button[type="submit"]:hover {
-    background-color: #ffb735;
-}
-
-.form-wrapper form button[type="submit"]:active {
-    background-color: #e69502;
 }
 
 .form-wrapper form label {
