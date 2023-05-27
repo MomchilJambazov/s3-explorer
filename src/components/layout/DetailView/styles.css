@@ -49,3 +49,7 @@
 .delete-popover .content {
     min-width: 220px;
 }
+
+.mx {
+    margin: 0 6px;
+}

@@ -8,9 +8,10 @@ import Popover from '@/components/ui/Popover'
 interface BreadcrumbsProps {
   currentDir: string | null;
   refetch: () => void;
+  showCreateOptions: boolean;
 }
 
-const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ currentDir, refetch }) => {
+const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ currentDir, refetch, showCreateOptions }) => {
   const { setCurrentDir } = useContext(TreeContext);
   const breadcrumbs = currentDir && generateBreadcrumbs(currentDir);
 
@@ -23,14 +24,18 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ currentDir, refetch }) => {
         ))}
       </div>
       <div>
-        <Popover
-          content={<div>This is the popover content</div>}
-          trigger={<Button>Add file</Button>}
-        />
-        <Popover
-          content={<CreateFolderForm refetch={refetch} dir={currentDir} />}
-          trigger={<Button>New folder</Button>}
-        />
+        {showCreateOptions && 
+          <>
+            <Popover
+              content={<div>This is the popover content</div>}
+              trigger={<Button>Add file</Button>}
+            />
+            <Popover
+              content={<CreateFolderForm refetch={refetch} dir={currentDir} />}
+              trigger={<Button>New folder</Button>}
+            />
+          </>
+        }
       </div>
     </div>
   );

@@ -27,13 +27,19 @@ const CreateFolderForm: React.FC<CreateFolderFormProps> = ({ dir, refetch }) => 
         }
     };
 
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+        const sanitizedValue = value.replace(/[^a-zA-Z_-]/g, '');
+        setFolderName(sanitizedValue)
+    }
+
     return (
         <form onSubmit={handleSubmit} style={{display:'flex', gap: '6px'}}>
             <Input
                 type="text"
                 placeholder="Enter folder name"
                 value={folderName}
-                onChange={(event) => setFolderName(event.target.value)}
+                onChange={handleChange}
             />
             <Button className='success' type="submit" disabled={!folderName}>Create</Button>
         </form>
