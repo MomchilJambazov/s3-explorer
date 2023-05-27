@@ -8,7 +8,7 @@ import useS3Objects from '@/hooks/useS3Objects';
 const POLLING_INTERVAL_MS = 15000;
 
 const Dashboard = () => {
-    const { currentDir, treeData, setTreeData } = useContext(TreeContext);
+    const { currentPath, treeData, setTreeData } = useContext(TreeContext);
     const { data, isLoading, hasError, refetch } = useS3Objects();
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const Dashboard = () => {
         <DetailView
           tree={treeData}
           refetch={refetch}
-          currentDir={currentDir}
+          currentPath={currentPath}
           keyCount={data?.KeyCount || 0}
           maxKeys={data?.MaxKeys || 0}
         />

@@ -27,6 +27,8 @@ a, .link {
 
 .dashboard > div {
   flex-grow: 1;
+  max-width: 72%;
+  max-width: calc(75% - 10px);
 }
 
 .card {

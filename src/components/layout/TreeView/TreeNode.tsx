@@ -9,9 +9,9 @@ interface TreeNodeProps {
 const TreeNodeComponent: React.FC<TreeNodeProps> = ({ node }) => {
   const [isOpen, setIsOpen] = useState(false);
   const hasChild = node.children && Object.keys(node.children).length > 0;
-  const { selectedItem, setSelectedItem, currentDir, setCurrentDir } = useContext(TreeContext);
+  const { selectedItem, setSelectedItem, currentPath, setCurrentPath } = useContext(TreeContext);
   const isSelected = selectedItem === node.key;
-  const isCurrentDir = currentDir === node.key;
+  const isCurrentDir = currentPath === node.key;
 
   const handleExpand = () => setIsOpen(!isOpen);
 
@@ -23,13 +23,13 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({ node }) => {
       }
     }
     if (e.detail === 2) { //handle double click
-      setCurrentDir(node.key);
+      setCurrentPath(node.key);
     }
   };
 
   useEffect(() => {
     setSelectedItem(null)
-  }, [currentDir]);
+  }, [currentPath]);
 
   //We need to render only folders
   if (node.type === 'file') {

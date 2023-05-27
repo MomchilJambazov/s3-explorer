@@ -1,4 +1,7 @@
 .detail-view {
+    width: calc(75% - 15px);
+}
+.detail-view .grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 20px;

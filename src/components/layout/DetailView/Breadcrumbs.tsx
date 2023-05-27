@@ -7,32 +7,32 @@ import Button from '@/components/ui/Button'
 import Popover from '@/components/ui/Popover'
 
 interface BreadcrumbsProps {
-  currentDir: string | null;
+  currentPath: string | null;
   refetch: () => void;
   showCreateOptions: boolean;
 }
 
-const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ currentDir, refetch, showCreateOptions }) => {
-  const { setCurrentDir } = useContext(TreeContext);
-  const breadcrumbs = currentDir && generateBreadcrumbs(currentDir);
+const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ currentPath, refetch, showCreateOptions }) => {
+  const { setCurrentPath } = useContext(TreeContext);
+  const breadcrumbs = currentPath && generateBreadcrumbs(currentPath);
 
   return (
     <div className='card breadcrumps'>
       <div>
-        <small onClick={() => setCurrentDir(null)}>/<b className='link'>root</b></small>
+        <small onClick={() => setCurrentPath(null)}>/<b className='link'>root</b></small>
         {breadcrumbs && breadcrumbs?.map((item) => (
-          <small key={item.path} onClick={() => setCurrentDir(item.path)}>/<b className='link'>{item.name}</b></small>
+          <small key={item.path} onClick={() => setCurrentPath(item.path)}>/<b className='link'>{item.name}</b></small>
         ))}
       </div>
       <div>
         {showCreateOptions && 
           <>
             <Popover
-              content={<CreateFileForm refetch={refetch} dir={currentDir} />}
+              content={<CreateFileForm refetch={refetch} dir={currentPath} />}
               trigger={<Button>Add file</Button>}
             />
             <Popover
-              content={<CreateFolderForm refetch={refetch} dir={currentDir} />}
+              content={<CreateFolderForm refetch={refetch} dir={currentPath} />}
               trigger={<Button>New folder</Button>}
             />
           </>

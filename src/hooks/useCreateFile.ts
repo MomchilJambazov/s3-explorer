@@ -21,6 +21,7 @@ const useCreateS3File = () => {
         try {
             const params: PutObjectCommandInput = {
                 Bucket: credentials.bucketName,
+                ContentEncoding: 'UTF-8',
                 Body: fileBody,
                 Key: fileKey,
             };
