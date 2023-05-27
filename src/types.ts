@@ -13,3 +13,8 @@ export interface AwsCredentials {
   bucketName: string;
   bucketRegion: string;
 }
+
+export interface Breadcrumb {
+  name: string;
+  path: string;
+}

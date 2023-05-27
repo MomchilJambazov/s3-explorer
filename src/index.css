@@ -14,8 +14,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
+a, .link {
   color: #3742fa;
+  cursor: pointer;
 }
 
 .dashboard {
