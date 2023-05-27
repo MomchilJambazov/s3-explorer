@@ -26,7 +26,7 @@ const useCreateS3File = () => {
                 Key: fileKey,
             };
 
-            await client.send(new PutObjectCommand(params));
+            await client?.send(new PutObjectCommand(params));
 
             return { success: true, error: null };
         } catch (error) {

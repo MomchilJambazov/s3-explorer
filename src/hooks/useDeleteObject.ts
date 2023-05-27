@@ -10,7 +10,7 @@ const useDeleteS3Object = () => {
 
   const deleteObject = async (objectKey: string) => {
     try {
-      await client.send(
+      await client?.send(
         new DeleteObjectCommand({
           Bucket: credentials.bucketName,
           Key: objectKey

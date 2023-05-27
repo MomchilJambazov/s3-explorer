@@ -9,7 +9,7 @@ const useCreateS3Folder = () => {
 
   const createFolder = async (folderKey: string) => {
     if (folderKey) {
-        await client.send(
+        await client?.send(
           new PutObjectCommand({
             Bucket: credentials.bucketName,
             Key: folderKey

@@ -16,7 +16,7 @@ const useS3Objects = () => {
       setHasError(false);
 
       try {
-        const response = await client.send(
+        const response = await client?.send(
           new ListObjectsV2Command({ Bucket: credentials.bucketName })
         );
         setData(response);

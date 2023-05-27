@@ -4,12 +4,12 @@ import useS3Client from '@/hooks/useS3Client';
 import { CredentialsContext } from '@/contexts/CredentialsContext';
 
 const useReadS3File = () => {
-  const s3Client = useS3Client();
+  const client = useS3Client();
   const { credentials } = useContext(CredentialsContext);
 
   const readFile = async (fileKey: string) => {
     try {
-      const response = await s3Client.send(new GetObjectCommand({
+      const response = await client?.send(new GetObjectCommand({
         Bucket: credentials.bucketName,
         Key: fileKey,
       }));
