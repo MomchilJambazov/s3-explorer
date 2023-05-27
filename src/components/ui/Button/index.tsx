@@ -1,7 +1,7 @@
 import './styles.css';
 
 interface ButtonProps {
-  onClick?: () => void;
+  onClick?: (e?:React.MouseEvent) => void;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   className?: string;

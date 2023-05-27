@@ -4,9 +4,10 @@ import './styles.css';
 interface PopoverProps {
   content: React.ReactNode;
   trigger: React.ReactNode;
+  className?: string;
 }
 
-const Popover: React.FC<PopoverProps> = ({ content, trigger }) => {
+const Popover: React.FC<PopoverProps> = ({ content, trigger, className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
   const anchorRef = useRef<HTMLDivElement>(null);
@@ -35,7 +36,7 @@ const Popover: React.FC<PopoverProps> = ({ content, trigger }) => {
   };
 
   return (
-    <div className="popover">
+    <div className={`popover ${className}`}>
       <div className="trigger" ref={anchorRef} onClick={handleToggle}>
         {trigger}
       </div>

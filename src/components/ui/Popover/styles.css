@@ -1,13 +1,13 @@
 .popover {
     position: relative;
     display: inline-block;
-  }
-  
-  .trigger {
+}
+
+.trigger {
     cursor: pointer;
-  }
-  
-  .content {
+}
+
+.content {
     position: absolute;
     top: 100%;
     right: 0;
@@ -16,4 +16,4 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     padding: 15px;
     border-radius: 4px;
-  }
+}

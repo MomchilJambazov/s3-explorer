@@ -49,3 +49,7 @@ a, .link {
   display: flex;
   gap: 8px;
 }
+
+.position-relative {
+  position: relative;
+}

@@ -4,6 +4,8 @@ import { TreeContext } from '@/contexts/TreeContext'
 import { findNodeByKey } from '@/utils/findTreeNode'
 import useDeleteObject from '@/hooks/useDeleteObject'
 import Breadcrumbs from './Breadcrumbs'
+import Button from '@/components/ui/Button'
+import Popover from '@/components/ui/Popover'
 import './styles.css';
 
 interface TreeViewProps {
@@ -19,25 +21,35 @@ const DetailView: React.FC<TreeViewProps> = ({ tree, currentDir, refetch }) => {
   const { setCurrentDir } = useContext(TreeContext);
   const deleteObject = useDeleteObject();
 
-  const handleDelete = (event:React.MouseEvent, key:string) => {
-    event.stopPropagation();
+  const handleDelete = (key: string, event?: React.MouseEvent) => {
+    event?.stopPropagation();
     deleteObject(key);
   }
 
   return (
     <div>
       <Breadcrumbs currentDir={currentDir} refetch={refetch} />
-      <div className="detail-view card">
-        {(!!currentDir && !currentDirObjects.length && isFolder) && <p>Folder is empty</p>}
-        {currentDirObjects.map(childNode => {
-          return (
-            <li className='link' onClick={() => setCurrentDir(childNode.key)} key={childNode.key}>
-              {childNode.name}
-              <span className='link' onClick={(e) => handleDelete(e, childNode.key)}>[x]</span>
-            </li>
-          );
-        })}
-      </div>
+      {(!!currentDir && !currentDirObjects.length && isFolder) ? <div className="card">
+        <p style={{ textAlign: 'center', width: '100%' }}>Folder is empty</p>
+      </div> :
+        <div className="detail-view card">
+          {currentDirObjects.map(childNode => {
+            const icon = childNode?.type === "folder" ? '📁' : '📄';
+            return (
+              <div className='position-relative grid-item'>
+                <div className='thumbnail' onClick={() => setCurrentDir(childNode.key)} key={childNode.key}>
+                  <span className='icon'>{icon}</span>
+                  {childNode.name}
+                </div>
+                <Popover
+                  className='delete-popover'
+                  content={<div>You are about to delete this {childNode.type}, are you sure? <Button className='danger' onClick={(e) => handleDelete(childNode.key, e)}>Yes</Button> </div>}
+                  trigger={<Button className='delete-button'>X</Button>}
+                />
+              </div>
+            );
+          })}
+        </div>}
     </div>
   );
 }
